@@ -4,7 +4,11 @@
         body{
             font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
         }
+        h1{
+            color:#687980;
+        }
         input{
+            outline:none;
             width: 30%;
             padding:10px;
             border-top:none;
@@ -51,8 +55,9 @@
     <input type="file" name="img" id="img" @error('img') is-invalid @enderror value="{{ old('img') }}"  autocomplete="img">
     <br>
     <br>
-    <a href="list">back</a>
-    <button type="submit">Add</button>
+    <a href="list"><i class="fas fa-arrow-circle-left"></i>&nbsp Back</a>
+    <button type="submit"><i class="fas fa-plus-circle"></i>&nbsp Add</button>
 </form>
 </body>
+<script src="https://kit.fontawesome.com/c4442c2032.js" crossorigin="anonymous"></script>
 </html>

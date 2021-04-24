@@ -4,7 +4,11 @@
         body{
             font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
         }
+        h1{
+            color:#687980;
+        }
         input{
+            outline:none;
             width: 30%;
             padding:10px;
             border-top:none;
@@ -52,9 +56,11 @@
 <form action="/edit" method="POST" enctype="multipart/form-data">
     @csrf
     <input type="hidden" name="id" value="{{$data['id']}}">
+    <label for="Title">Title: </label>
     <input type="text" name="Title" value="{{$data['Title']}}">
     <br>
     <br>
+    <label for="Title">Description: </label>
     <input type="text" name="Description" value="{{$data['Description']}}">
     <br>
     <br>
@@ -67,8 +73,9 @@
     </div>
     <br>
     <br>
-    <a href="../list">back</a>
-    <button type="submit">Update</button>
+    <a href="../list"><i class="fas fa-arrow-circle-left"></i>&nbsp Back</a>
+    <button type="submit"><i class="fas fa-save"></i>&nbsp Update</button>
 </form>
 </body>
+<script src="https://kit.fontawesome.com/c4442c2032.js" crossorigin="anonymous"></script>
 </html>
