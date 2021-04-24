@@ -7,58 +7,31 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-   public function index()
-   {
-       $posts = Post::all();
-       return view('posts.index',['posts'=>$posts]); 
+   function show(){
+       $data=Post::all();
+       return view('list', ['posts'=>$data]);
    }
-
-   public function create()
-   {
-       return view('posts.create');
+   function addData(Request $req){
+    $post=new Post;
+    $post->Title=$req->Title;
+    $post->Description=$req->Description;
+    $post->save();
+    return redirect('list');
    }
-
-   public function store(Request $request)
-   {
-       $request->validate([
-           'Title' => 'required',
-           'Description' => 'required',
-       ]);
-
-       Post::create($request->all());
-
-       return redirect()->route('posts.index')
-       ->with('success','Posts created successfully.');
+   function deleteData($id){
+    $data=Post::find($id);
+    $data->delete();
+    return redirect('list');
    }
-
-   public function show(Post $post)
-   {    
-       $post = Post::where('id', $post->id);
-       return view('posts.show', ['post'=>$post]);
+   function editData($id){
+    $data=Post::find($id);
+    return view('edit',['data'=>$data]);
    }
-
-   public function edit(Post $post)
-   {    
-       return view ('posts.edit',compact('post'));
-   }
-
-   public function update(Request $request,Post $post)
-   {
-       $request->validate([
-
-       ]);
-
-       $post->update($request->all());
-
-       return redirect()->route('posts.index')
-       ->with('success','Post updated successfully');
-   }
-
-   public function destroy(Post $post)
-   {
-       $post->delete();
-
-       return redirect()->route('posts.index')
-       ->with('success','Post deleted successfully');
+   function updateData(Request $req){
+    $data=Post::find($req->id);
+    $data->Title=$req->Title;
+    $data->Description=$req->Description;
+    $data->save();
+    return redirect('list');
    }
 }

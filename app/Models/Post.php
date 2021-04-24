@@ -10,5 +10,6 @@ class Post extends Model
     use HasFactory;
 
     protected $fillable = ['Title' , 'Description'];
-    protected $dates = ['updated_at', 'created_at'];
+    public $timestamps = false;
+    
 }
