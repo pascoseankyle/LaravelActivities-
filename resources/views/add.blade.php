@@ -39,12 +39,16 @@
 <h1>Add a Post</h1>
 <hr>
 <br>
-<form action="add" method="POST">
+<form action="add" method="POST" enctype="multipart/form-data" >
     @csrf
     <input type="text" name="Title" placeholder="Title">
     <br>
     <br>
     <input type="text" name="Description" placeholder="Description">
+    <br>
+    <br>
+    <label for="img">Add a photo</label>
+    <input type="file" name="img" id="img" @error('img') is-invalid @enderror value="{{ old('img') }}"  autocomplete="img">
     <br>
     <br>
     <a href="list">back</a>

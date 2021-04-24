@@ -12,9 +12,32 @@ class PostController extends Controller
        return view('list', ['posts'=>$data]);
    }
    function addData(Request $req){
-    $post=new Post;
-    $post->Title=$req->Title;
-    $post->Description=$req->Description;
+
+    $req->validate([
+        'Title' => 'required|max:100',
+        'Description' => 'required'
+    ]);
+    // ---------  Old Code ---------- //
+    // $post->Title=$req->Title;
+    // $post->Description=$req->Description;
+    // ---------  Old Code ---------- //
+    if($req->hasFile('img')){
+
+        $filenameWithExt = $req->file('img')->getClientOriginalName();
+
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        
+        $extension = $req->file('img')->getClientOriginalExtension();
+
+        $filenameToStore = $filename.'_'.time().'.'.$extension;
+
+        $path = $req->file('img')->storeAs('public/img', $filenameToStore);
+    } else{
+        $filenameToStore = '';
+    }
+    $post = new Post();
+    $post->fill($req->all());
+    $post->img = $filenameToStore;
     $post->save();
     return redirect('list');
    }
