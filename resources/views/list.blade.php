@@ -69,7 +69,7 @@
         @foreach($posts as $post)
         <tr>
             <td>{{$no++}}</td>
-            <td>{{$post['Title']}}</td>
+            <td >{{$post['Title']}}</td>
             <td>{{$post['Description']}}</td>
             <td>
             <a href="{{'edit-data/'.$post->id}}" class="edit"><i class="far fa-eye"></i>&nbsp Edit</a>
